@@ -1,0 +1,33 @@
+version: '3.5'
+
+services:
+  user-backend:
+    build: .
+    ports:
+      - "8030:8030"
+    environment:
+      - PROFILE=staging
+    depends_on:
+      - user-db
+    networks:
+      - user-network
+
+  user-db:
+    image: postgres:14.6
+    ports:
+      - "5430:5432"
+    command: ["postgres", "-c", "log_statement=all", "-c", "log_destination=stderr"]
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=user
+    volumes:
+      - user-db-volume:/var/lib/postgresql/data
+    networks:
+      - user-network
+
+volumes:
+  user-db-volume:
+
+networks:
+  user-network:

@@ -1,10 +1,7 @@
 package com.example.userpattern.models;
 
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -15,6 +12,9 @@ public class User {
     @Id
     @GeneratedValue
     private UUID id;
+
     private String name;
 
+    @Column(unique = true)
+    private String email;
 }

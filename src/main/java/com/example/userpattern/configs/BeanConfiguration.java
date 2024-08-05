@@ -13,8 +13,4 @@ public class BeanConfiguration {
         return new UserService(userRepository);
     }
 
-    @Bean
-    UserController usercontroller(UserService userService) {
-        return new UserController(userService);
-    }
 }

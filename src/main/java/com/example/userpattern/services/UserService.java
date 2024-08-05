@@ -13,15 +13,14 @@ import java.util.UUID;
 @Service
 public class UserService {
 
-    final private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     public User createUser(UserDTO userDTO) {
-        User user = new User();
-        BeanUtils.copyProperties(userDTO, user);
+        User user = User.builder().name(userDTO.getName()).email(userDTO.getEmail()).password(userDTO.getPassword()).build();
         return userRepository.save(user);
     }
 

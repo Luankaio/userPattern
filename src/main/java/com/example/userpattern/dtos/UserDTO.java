@@ -4,9 +4,10 @@
 import javax.validation.constraints.*;
 import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
-@NoArgsConstructor
+@Builder
 public class UserDTO {
 
     @NotEmpty

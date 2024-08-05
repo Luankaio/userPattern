@@ -13,8 +13,11 @@ import java.util.UUID;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    final private UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public User createUser(UserDTO userDTO) {
         User user = new User();
@@ -24,5 +27,9 @@ public class UserService {
 
     public Optional<User> findUserByID(UUID id){
         return userRepository.findById(id);
+    }
+
+    public void deleteUserByID(UUID id){
+        userRepository.deleteById(id);
     }
 }

@@ -4,7 +4,9 @@
 import javax.validation.constraints.*;
 import lombok.*;
 
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserDTO {
 
     @NotEmpty
@@ -15,7 +17,7 @@ public class UserDTO {
 
     @NotEmpty
     @Size(min = 8, message = "Password must be at least 8 characters long")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z]).*$")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-zA-Z]).*$")      
     private String password;
 
 }

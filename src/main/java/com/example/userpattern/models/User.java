@@ -1,9 +1,9 @@
 package com.example.userpattern.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
@@ -13,12 +13,9 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-@jakarta.persistence.Entity
-public class User {
-
-    @jakarta.persistence.Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+@EqualsAndHashCode(callSuper = true)
+@Entity
+public class User extends BaseEntity {
 
     private String name;
 

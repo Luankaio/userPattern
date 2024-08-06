@@ -1,7 +1,7 @@
     package com.example.userpattern.dtos;
 
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Getter

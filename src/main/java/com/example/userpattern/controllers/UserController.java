@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -20,18 +21,28 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/hello")
+    public String hello(){
+        return "Hello World";
+    }
+
+    @PostMapping()
     public ResponseEntity<User> createUser(@RequestBody UserDTO userDTO) {
         return ResponseEntity.ok(userService.createUser(userDTO));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<User>> findUserById(@PathVariable UUID id) {
-        return ResponseEntity.ok(userService.findUserByID(id        ));
+    public ResponseEntity<Optional<User>> findUserById(@PathVariable UUID id) throws Exception{
+        return ResponseEntity.ok(userService.findUserByID(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<User>> findAll(){
+        return ResponseEntity.ok(userService.findAll());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable UUID id){
+    public ResponseEntity<Void> deleteUser(@PathVariable UUID id) throws Exception{
         userService.deleteUserByID(id);
         return ResponseEntity.noContent().build();
     }

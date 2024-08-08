@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@OpenAPIDefinition(info = @Info(title = "Employees API", version = "2.0", description = "Employees Information"))
+@OpenAPIDefinition(info = @Info(title = "User Pattern API", version = "2.0", description = ""))
 public class UserPatternApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserPatternApplication.class, args);

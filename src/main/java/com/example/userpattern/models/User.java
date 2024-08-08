@@ -25,12 +25,15 @@ public class User extends BaseEntity {
     @JsonIgnore
     private String password;
 
-    private Date createdAT;
+    private String role;
+
+    private Date createdAt;
     private Date updatedAt;
+    private Date deletedAt;
 
     @PrePersist
     protected void onCreate() {
-        this.createdAT = new Date();
+        this.createdAt = new Date();
         this.updatedAt = new Date();
     }
 

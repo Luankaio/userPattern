@@ -3,6 +3,7 @@ package com.example.userpattern.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.PropertyValues;
 
 import java.util.Date;
 import java.util.UUID;
@@ -25,7 +26,7 @@ public class User extends BaseEntity {
     @JsonIgnore
     private String password;
 
-    private String role;
+    private PropertyValues role;
 
     private Date createdAt;
     private Date updatedAt;
@@ -35,6 +36,10 @@ public class User extends BaseEntity {
     protected void onCreate() {
         this.createdAt = new Date();
         this.updatedAt = new Date();
+    }
+
+    public String getUsername() {
+        return this.name;
     }
 
 }

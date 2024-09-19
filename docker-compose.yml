@@ -1,30 +1,30 @@
-version: '3.5'
+  version: '3.5'
 
-services:
-  user-backend:
-    build: .
-    ports:
-      - "8030:8030"
-    environment:
-      - PROFILE=staging
-    depends_on:
-      - user-db
+  services:
+    user-backend:
+      build: .
+      ports:
+        - "8030:8030"
+      environment:
+        - PROFILE=staging
+      depends_on:
+        - user-db
 
-  user-db:
-    image: postgres:14.6
-    ports:
-      - "5430:5432"
-    environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=user
-    volumes:
-      - schedule-db-volume:/var/lib/postgresql/data
-    networks:
-      - user-network
+    user-db:
+      image: postgres:14.6
+      ports:
+        - "5430:5432"
+      environment:
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_USER=postgres
+        - POSTGRES_DB=user
+      volumes:
+        - schedule-db-volume:/var/lib/postgresql/data
+      networks:
+        - user-network
 
-volumes:
-  schedule-db-volume:
+  volumes:
+    schedule-db-volume:
 
-networks:
-  user-network:
+  networks:
+    user-network:

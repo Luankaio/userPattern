@@ -10,17 +10,20 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    @Autowired
     private JwtUtil jwtUtil;
+    private final CustomUserDetailService customUserDetailsService;
 
-    @Autowired
-    private CustomUserDetailService customUserDetailsService;
-
+    public JwtAuthenticationFilter(JwtUtil jwtUtil, CustomUserDetailService customUserDetailsService) {
+        this.jwtUtil = jwtUtil;
+        this.customUserDetailsService = customUserDetailsService;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -30,12 +33,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String requestURI = request.getRequestURI();
 
         // Permitir acesso ao Swagger UI e docs sem autenticação
-        if (requestURI.startsWith("/swagger-ui/") || requestURI.startsWith("/v3/api-docs/")) {
+        if (requestURI.startsWith("/swagger-ui/") || requestURI.startsWith("/v1/authenticate/")) {
+            logger.debug("Permitting access to Swagger");
             filterChain.doFilter(request, response);
             return;
         }
 
-        if (header != null && header.startsWith("Bearer ")) {
+        if (header != null && header.startsWith("Bearer")) {
             String token = header.substring(7);
             String username = jwtUtil.extractUsername(token);
 

@@ -21,7 +21,7 @@ public class JwtUtil {
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
                 .signWith(SignatureAlgorithm.HS256, secret)
-                .compact();
+                .                                       compact();
     }
 
     public String extractUsername(String token) {

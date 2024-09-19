@@ -11,7 +11,6 @@
     @Setter
     @EqualsAndHashCode
     public class BaseEntity  {
-
         @Id
         @GeneratedValue(generator = "UUID")
         @UuidGenerator

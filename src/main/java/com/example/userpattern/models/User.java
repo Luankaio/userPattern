@@ -6,6 +6,8 @@ import lombok.*;
 import org.springframework.beans.PropertyValues;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Table(name = "tb_users")
@@ -18,7 +20,7 @@ import java.util.UUID;
 @Entity
 public class User extends BaseEntity {
 
-    private String name;
+    private String username;
 
     @Column(unique = true)
     private String email;
@@ -26,7 +28,8 @@ public class User extends BaseEntity {
     @JsonIgnore
     private String password;
 
-    private PropertyValues role;
+    @ElementCollection
+    private List<String> roles;
 
     private Date createdAt;
     private Date updatedAt;
@@ -38,8 +41,6 @@ public class User extends BaseEntity {
         this.updatedAt = new Date();
     }
 
-    public String getUsername() {
-        return this.name;
-    }
+
 
 }

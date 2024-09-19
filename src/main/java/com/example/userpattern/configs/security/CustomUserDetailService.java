@@ -23,10 +23,10 @@ public class CustomUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
         return org.springframework.security.core.userdetails.User
-                .withUsername(user.getName())
+                .withUsername(user.getUsername())
                 .password(user.getPassword())
-                .authorities(user.getRole().stream()
-                        .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .authorities(user.getRoles().stream()
+                        .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList()))
                 .build();
     }

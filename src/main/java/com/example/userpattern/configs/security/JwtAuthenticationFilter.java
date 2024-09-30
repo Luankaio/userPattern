@@ -33,7 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String requestURI = request.getRequestURI();
 
         // Permitir acesso ao Swagger UI e docs sem autenticação
-        if (requestURI.startsWith("/swagger-ui/") || requestURI.startsWith("/v1/authenticate/")) {
+        if (requestURI.startsWith("/swagger-ui/") || requestURI.startsWith("/v1/authenticate")) {
             logger.debug("Permitting access to Swagger");
             filterChain.doFilter(request, response);
             return;

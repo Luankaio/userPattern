@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/v1")
 public class AuthenticationController {
-    private AuthenticationManager authenticationManager;
-    private JwtUtil jwtUtil;
-    private CustomUserDetailService customUserDetailsService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
+    private final CustomUserDetailService customUserDetailsService;
 
     public AuthenticationController(AuthenticationManager authenticationManager, JwtUtil jwtUtil, CustomUserDetailService customUserDetailsService) {
         this.authenticationManager = authenticationManager;

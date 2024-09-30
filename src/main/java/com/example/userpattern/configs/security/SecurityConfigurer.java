@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,7 +32,7 @@ public class SecurityConfigurer {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/login", "/swagger-ui/**", "/v3/api-docs/**", "/v1/authenticate").permitAll()
+                        .requestMatchers("/", "/login", "/swagger-ui/**", "/v3/api-docs/**", "/v1/authenticate", "/error").permitAll()
                         .anyRequest().authenticated()
                         )
                         .addFilterBefore(new JwtAuthenticationFilter(jwtUtil, customUserDetailService), UsernamePasswordAuthenticationFilter.class);
@@ -47,6 +48,15 @@ public class SecurityConfigurer {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public InMemoryUserDetailsManager userDetailsService() throws Exception {
+        UserDetails user = User.withUsername("admin")
+                .password(passwordEncoder().encode("master123"))
+                .roles("ADMIN") // Ou defina as roles conforme necessário
+                .build();
+        return new InMemoryUserDetailsManager(user);
     }
 
 

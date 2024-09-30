@@ -32,7 +32,7 @@ public class SecurityConfigurer {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/login", "/swagger-ui/**", "/v3/api-docs/**", "/v1/authenticate", "/error").permitAll()
+                        .requestMatchers("/login", "/swagger-ui/**", "/v3/api-docs/**", "/v1/authenticate", "/users").permitAll()
                         .anyRequest().authenticated()
                         )
                         .addFilterBefore(new JwtAuthenticationFilter(jwtUtil, customUserDetailService), UsernamePasswordAuthenticationFilter.class);
@@ -50,14 +50,7 @@ public class SecurityConfigurer {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public InMemoryUserDetailsManager userDetailsService() throws Exception {
-        UserDetails user = User.withUsername("admin")
-                .password(passwordEncoder().encode("master123"))
-                .roles("ADMIN") // Ou defina as roles conforme necessário
-                .build();
-        return new InMemoryUserDetailsManager(user);
-    }
+
 
 
 

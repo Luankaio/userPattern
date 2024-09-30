@@ -11,7 +11,7 @@ import lombok.*;
 public class UserDTO {
 
     @NotEmpty
-    private String name;
+    private String username;
 
     @NotEmpty
     private String email;

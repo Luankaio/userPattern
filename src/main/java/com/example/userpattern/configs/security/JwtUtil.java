@@ -13,7 +13,7 @@ import java.util.function.Function;
 
 @Service
 public class JwtUtil {
-    private String secret = "your_secret_key";
+    private String secret = "9iiGR2FozV8itIj1x9XV3UmNmfX2Y/Uu/7suAioSZBk=";
 
     public String generateToken(UserDetails userDetails) {
         return Jwts.builder()

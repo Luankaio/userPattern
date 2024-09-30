@@ -23,4 +23,6 @@ public class BeanConfiguration {
     JwtAuthenticationFilter jwtAuthenticationFilter(JwtUtil jwtUtil, CustomUserDetailService customUserDetailService) {
         return new JwtAuthenticationFilter(jwtUtil, customUserDetailService);
     }
+
+
 }
